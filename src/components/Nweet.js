@@ -7,7 +7,8 @@ import {
     ref,
     updateDoc,
 } from "fbase";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const Nweet = ({ nweetObj, isOwner }) => {
@@ -33,10 +34,12 @@ const Nweet = ({ nweetObj, isOwner }) => {
     };
     const toggleEditing = () => setEditing((prev) => !prev);
     return (
-        <div>
+        <div className="nweet">
             {editing ? (
                 <>
-                    <form onSubmit={onEditClick}>
+                    <form
+                        onSubmit={onEditClick}
+                        className="container nweetEdit">
                         <input
                             onChange={editNweet}
                             type="text"
@@ -44,25 +47,31 @@ const Nweet = ({ nweetObj, isOwner }) => {
                             value={newNweet}
                             required
                         />
-                        <input type="submit" value="editNweet" />
+                        <input
+                            type="submit"
+                            value="edit Nweet"
+                            className="formBtn"
+                        />
                     </form>
-                    <button onClick={toggleEditing}>Cancel</button>
+                    <button
+                        onClick={toggleEditing}
+                        className="formBtn cancelBtn">
+                        Cancel
+                    </button>
                 </>
             ) : (
                 <>
                     <h4>{nweetObj.nweet}</h4>
-                    {nweetObj.photoURL && (
-                        <img
-                            src={nweetObj.photoURL}
-                            width="50px"
-                            height="50px"
-                        />
-                    )}
+                    {nweetObj.photoURL && <img src={nweetObj.photoURL} />}
                     {isOwner && (
-                        <>
-                            <button onClick={onDeleteClick}>delet</button>
-                            <button onClick={toggleEditing}>edit</button>
-                        </>
+                        <div className="nweet__actions">
+                            <span onClick={onDeleteClick}>
+                                <FontAwesomeIcon icon={faTrash} />
+                            </span>
+                            <span onClick={toggleEditing}>
+                                <FontAwesomeIcon icon={faPencilAlt} />
+                            </span>
+                        </div>
                     )}
                 </>
             )}
