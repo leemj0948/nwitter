@@ -8,7 +8,7 @@ import "firebase/compat/storage";
 // import 'firebase/database';
 import {getAuth,signInWithEmailAndPassword,
   createUserWithEmailAndPassword,onAuthStateChanged,GoogleAuthProvider,GithubAuthProvider,signInWithPopup,signOut } from "firebase/auth";
-import {getFirestore,addDoc,collection,query,getDocs} from "firebase/firestore"
+import {getFirestore,addDoc,collection,query,getDocs,onSnapshot,orderBy} from "firebase/firestore"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -32,4 +32,4 @@ export const dbService = getFirestore();
 export const dbAddDoc = addDoc; // 명시된 데이터를 담은 새로운 document를 collection에 추가 document ID 자동으로 추가 
 export const dbCollection = collection;
 
-export {GoogleAuthProvider,GithubAuthProvider,signInWithPopup,signOut,query,getDocs}
+export {GoogleAuthProvider,GithubAuthProvider,signInWithPopup,signOut,query,getDocs,onSnapshot,orderBy}

@@ -1,7 +1,7 @@
-import { dbAddDoc, dbCollection, dbService,query,getDocs } from "fbase";
+import { dbAddDoc, dbCollection, dbService,query,getDocs,orderBy,onSnapshot} from "fbase";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-const Home= ()=>{
+const Home= ({userObj})=>{
     const [nweet, setNweet] = useState('');
     const [nweets,setNweets]= useState([]);
     
@@ -9,19 +9,28 @@ const Home= ()=>{
         getNweets();
     },[])
     const getNweets = async ()=>{
-        const q = query(dbCollection(dbService,'nweets'));
+        const q = query(dbCollection(dbService,'nweets'),orderBy('createAt','desc'));
+        // 가져오기 방법1 
+        // const dbSnapshot = await getDocs(q);
         
-        const dbSnapshot = await getDocs(q);
+        // dbSnapshot.forEach((doc)=>{
+        //    const nweetObj = {
+        //         ...doc.data(),
+        //         id:doc.id,
+                
+        //     }
+        //     setNweets(prv=>[nweetObj,...prv]);
+        // })
         
-        dbSnapshot.forEach((doc)=>{
-           const nweetObj = {
-                ...doc.data(),
-                id:doc.id,
-            }
-            setNweets(prv=>[nweetObj,...prv]);
+        
+        // 가져오기 방법2
+        onSnapshot(q,(shot)=>{
+            const nweetArr = shot.docs.map((doc)=>({id:doc.id,...doc.data()}));
+            setNweets(nweetArr);
         })
       
     }
+
     const onSubmit = async (e)=>{
         e.preventDefault();
         try{
@@ -29,6 +38,7 @@ const Home= ()=>{
             const twit = await dbAddDoc(dbCollection(dbService,'nweets'),{
                 nweet,
                 createAt:Date.now(),
+                creatorId:userObj.uid
             })
         }catch(err){
             console.error('Error',err)
@@ -48,7 +58,6 @@ const Home= ()=>{
             </form>
             <div>
                 {nweets.map(data=>{
-                    console.log(data)
                    return (
                     <div key={data.id}>
                     <h4>{data.nweet}</h4>    
