@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth,signInWithEmailAndPassword,
-  createUserWithEmailAndPassword, } from "firebase/auth";
+  createUserWithEmailAndPassword,onAuthStateChanged,GoogleAuthProvider,GithubAuthProvider,signInWithPopup } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -21,3 +21,6 @@ const app = initializeApp(firebaseConfig);
 export const authService = getAuth();
 export const signIn = signInWithEmailAndPassword; //로그인 할때의 통신
 export const signup = createUserWithEmailAndPassword; // 가입할때 통신 
+export const isAuthChange = onAuthStateChanged //로그인이후 로그인 값이 있는지 
+
+export {GoogleAuthProvider,GithubAuthProvider,signInWithPopup}
