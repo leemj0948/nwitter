@@ -1,8 +1,16 @@
 import Nweet from "components/Nweet";
-import { dbCollection, dbService, query, orderBy, onSnapshot } from "fbase";
+import {
+    dbCollection,
+    dbService,
+    query,
+    orderBy,
+    onSnapshot,
+    authService,
+} from "fbase";
 
 import React, { useEffect, useState } from "react";
 import NweetFactory from "components/NweetFactory";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Home = ({ userObj }) => {
     const [nweets, setNweets] = useState([]);
@@ -10,6 +18,11 @@ const Home = ({ userObj }) => {
     useEffect(() => {
         getNweets();
     }, []);
+    onAuthStateChanged(authService, (user) => {
+        if (user === null) {
+            getNweets();
+        }
+    });
     const getNweets = async () => {
         const q = query(
             dbCollection(dbService, "nweets"),
@@ -18,7 +31,7 @@ const Home = ({ userObj }) => {
         // 가져오기 방법1
         // const dbSnapshot = await getDocs(q);
 
-        // dbSnapshot.forEach((doc)=>{
+        // dbSnabpshot.forEach((doc)=>{
         //    const nweetObj = {
         //         ...doc.data(),
         //         id:doc.id,

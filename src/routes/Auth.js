@@ -37,7 +37,7 @@ const Auth = () => {
                 style={{ marginBottom: 30 }}
             />
             <AuthForm />
-            <div lassName="authBtns">
+            <div className="authBtns">
                 <button
                     name="google"
                     onClick={onSocialClick}

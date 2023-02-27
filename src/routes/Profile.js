@@ -45,7 +45,7 @@ const Profile = ({ userObj, refreshUser }) => {
                     autoFocus
                     type="text"
                     placeholder="Display name"
-                    value={newDisplayName}
+                    value={newDisplayName || ""}
                     className="formInput"
                 />
                 <input
