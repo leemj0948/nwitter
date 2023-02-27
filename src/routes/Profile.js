@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { authService, dbService, query, signOut, updateProfile } from "fbase";
 import { collection, getDoc, where } from "firebase/firestore";
 
 const Profile = ({ userObj, refreshUser }) => {
     // TODO: 프로파일 이미지 변경하는것 만들기
-    const history = useHistory();
+    const navigate = useNavigate();
     const auth = authService;
     // auth 를 전역변수로 관리하면 좋을것 같다.
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
     useEffect(() => {}, []);
     const onLogOutClick = () => {
         signOut(auth);
-        history.push("/");
+        navigate("/");
     };
     const getMyNweet = async () => {
         const q = query(
