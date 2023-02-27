@@ -1,3 +1,4 @@
+import Nweet from "components/Nweet";
 import { dbAddDoc, dbCollection, dbService,query,getDocs,orderBy,onSnapshot} from "fbase";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -59,9 +60,7 @@ const Home= ({userObj})=>{
             <div>
                 {nweets.map(data=>{
                    return (
-                    <div key={data.id}>
-                    <h4>{data.nweet}</h4>    
-                </div>
+                    <Nweet nweetObj={data} key={data.id} isOwner={data.creatorId===userObj.uid}/>
                    )
                    
                 })}
