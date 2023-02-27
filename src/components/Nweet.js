@@ -19,7 +19,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
         const isDelete = window.confirm("Are you sure you want to delete?");
         if (isDelete) {
             await deleteDoc(nweetRef);
-            await deleteObject(ref(storageService, nweetObj.photoURL));
+            await deleteObject(ref(storageService, nweetObj.photoURL)); //사진 지우기
         }
     };
     const onEditClick = async (e) => {

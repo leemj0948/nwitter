@@ -15,6 +15,7 @@ import {
     GithubAuthProvider,
     signInWithPopup,
     signOut,
+    updateProfile,
 } from "firebase/auth";
 import {
     getFirestore,
@@ -27,6 +28,7 @@ import {
     deleteDoc,
     updateDoc,
     doc,
+    where,
 } from "firebase/firestore";
 import {
     getStorage,
@@ -63,6 +65,9 @@ export {
     GithubAuthProvider,
     signInWithPopup,
     signOut,
+    updateProfile,
+};
+export {
     query,
     getDocs,
     onSnapshot,
@@ -70,6 +75,6 @@ export {
     deleteDoc,
     updateDoc,
     doc,
-};
-
+    where,
+}; //firebase/firestore
 export { getStorage, ref, uploadString, getDownloadURL, deleteObject }; // 이미지 업로드 firebase/storage
