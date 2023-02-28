@@ -52,7 +52,9 @@ npm run deploy
 - firebase API 활용 및 API 공식문서 확인
 - gh-pages를 활용한 실제 배포 작업 
 
-## 기능 소개 
+## 기능 소개 및 회고록 
+
+<a href='https://velog.io/@ljo094822/%ED%8A%B8%EC%9C%84%ED%84%B0-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9-%ED%9A%8C%EA%B3%A0%EB%A1%9D'> 벨로그 사이트</a>
 
 ## Reference 
 Thanks for Nico (Nomad Coder)
